@@ -403,6 +403,14 @@ strong { font-weight: 600; color: var(--ink); }
   background-size: cover; background-position: center;
   display: grid; align-items: center; padding: clamp(2rem,5vw,3.5rem);
 }
+.portrait {
+  aspect-ratio: 1/1; border-radius: var(--radius); overflow: hidden;
+  background-color: var(--navy-800);
+  background-image: var(--img, none); background-size: cover; background-position: center 18%;
+  border: 1px solid var(--line); margin-bottom: 1rem;
+}
+.roster { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 1.1rem; }
+.roster .member { padding: 1rem; }
 .photo-band > * { position: relative; max-width: 60ch; }
 .photo-band h2, .photo-band h3 { color: #fff; }
 .photo-band p { color: rgba(255,255,255,.85); }

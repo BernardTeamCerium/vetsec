@@ -38,6 +38,9 @@
       });
     }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
     reveals.forEach(function (el) { io.observe(el); });
+    // Safety net: never let content stay hidden if the observer misses (some
+    // browsers/headless contexts don't fire it reliably).
+    setTimeout(function () { reveals.forEach(function (el) { el.classList.add('in'); }); }, 2200);
   } else {
     reveals.forEach(function (el) { el.classList.add('in'); });
   }
