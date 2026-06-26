@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — VetSec</title>
+  <meta name="description" content="Get in touch with VetSec. Email info@vetsec.org or send us a message — questions, partnerships, volunteering, and donations all welcome." />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html" aria-label="VetSec home"><img src="assets/img/logo.svg" alt="VetSec" width="220" height="48" /></a>
+      <nav id="nav-links" class="nav-links" aria-label="Primary">
+        <a href="our-story.html">Our Story</a>
+        <a href="programs.html">Programs</a>
+        <a href="partners.html">Partners</a>
+        <a href="team.html">Team</a>
+        <a href="global-network.html">Global Network</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+        <a class="btn btn--primary" href="join.html">Join Us</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn--primary" href="join.html">Join Us</a>
+        <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="crumbs"><a href="index.html">Home</a> / Contact Us</p>
+        <span class="eyebrow">Contact us</span>
+        <h1>Let’s talk.</h1>
+        <p>Questions, partnerships, volunteering, donations, or press — write to us with your questions or comments and we’ll get back to you.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="contact-grid">
+          <!-- Info column -->
+          <div>
+            <span class="eyebrow">Reach us directly</span>
+            <h2 class="mt-2" style="font-size:var(--step-2);">Get in touch</h2>
+
+            <div class="info-block mt-3">
+              <span class="k">Email</span>
+              <p><a href="mailto:info@vetsec.org">info@vetsec.org</a></p>
+            </div>
+            <div class="info-block">
+              <span class="k">Organization</span>
+              <p>VetSec, Inc. — a registered 501(c)(3) nonprofit<br /><span style="color:var(--text-muted); font-size:.95rem;">EIN 83-1966007</span></p>
+            </div>
+            <div class="info-block">
+              <span class="k">Follow along</span>
+              <div class="social mt-2">
+                <a href="https://www.linkedin.com/company/veteransec" target="_blank" rel="noopener" aria-label="VetSec on LinkedIn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.24 8h4.52v13.5H.24V8zm7.5 0h4.33v1.85h.06c.6-1.14 2.07-2.34 4.26-2.34 4.56 0 5.4 3 5.4 6.9v7.09h-4.52v-6.29c0-1.5-.03-3.43-2.09-3.43-2.09 0-2.41 1.63-2.41 3.32v6.4H7.74V8z"/></svg>
+                </a>
+                <a href="https://x.com/VeteranSec" target="_blank" rel="noopener" aria-label="VetSec on X">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 1.2h3.7l-8 9.1L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.4l8.5-9.8L0 1.2h7.6l5.2 6.9 6.1-6.9zm-1.3 19.4h2L6.5 3.3h-2.2L17.6 20.6z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/c/VetSec" target="_blank" rel="noopener" aria-label="VetSec on YouTube">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact form -->
+          <div>
+            <div class="form-card">
+              <h2 style="font-size:var(--step-2);">Send a message</h2>
+              <p style="color:var(--text-muted); margin:.5rem 0 1.5rem;">Fields marked <span style="color:var(--gold-deep);">*</span> are required. We’ll reply by email.</p>
+
+              <!-- Operational form. Set data-endpoint to a Formspree/Netlify/own URL to
+                   deliver server-side; with no endpoint it falls back to a pre-filled email. -->
+              <form data-form data-mailto="info@vetsec.org" data-endpoint="">
+                <div class="form-row">
+                  <div class="field">
+                    <label for="c-name">Name <span class="req">*</span></label>
+                    <input id="c-name" name="name" type="text" autocomplete="name" required />
+                    <p class="field-error">Please enter your name.</p>
+                  </div>
+                  <div class="field">
+                    <label for="c-email">Email <span class="req">*</span></label>
+                    <input id="c-email" name="email" type="email" autocomplete="email" required />
+                    <p class="field-error">Please enter a valid email address.</p>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="c-topic">I’m reaching out about <span class="req">*</span></label>
+                  <select id="c-topic" name="subject" required>
+                    <option value="" disabled selected>Select a topic…</option>
+                    <option>Membership question</option>
+                    <option>Becoming a partner / sponsor</option>
+                    <option>Donating</option>
+                    <option>Volunteering</option>
+                    <option>Press / media</option>
+                    <option>Something else</option>
+                  </select>
+                  <p class="field-error">Please choose a topic.</p>
+                </div>
+                <div class="field">
+                  <label for="c-message">Message <span class="req">*</span></label>
+                  <textarea id="c-message" name="message" required placeholder="How can we help?"></textarea>
+                  <p class="field-error">Please add a short message.</p>
+                </div>
+                <!-- honeypot -->
+                <div class="hp" aria-hidden="true"><label>Leave this field empty<input class="hp-field" name="company_website" tabindex="-1" autocomplete="off" /></label></div>
+
+                <button class="btn btn--primary btn--lg" type="submit" style="width:100%; justify-content:center;">Send message</button>
+                <div class="form-status" aria-live="polite"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand"><img src="assets/img/logo-light.svg" alt="VetSec" width="220" height="48" /><p>A 501(c)(3) nonprofit creating a world where no veteran pursuing a career in cybersecurity goes unemployed.</p></div>
+        <div><h4>Explore</h4><ul><li><a href="our-story.html">Our Story</a></li><li><a href="programs.html">Programs</a></li><li><a href="team.html">Our Team</a></li><li><a href="global-network.html">Global Network</a></li></ul></div>
+        <div><h4>Get involved</h4><ul><li><a href="join.html">Join Us</a></li><li><a href="partners.html">Partners &amp; Sponsors</a></li><li><a href="partners.html#donate">Donate</a></li><li><a href="contact.html">Contact Us</a></li></ul></div>
+        <div><h4>Connect</h4><ul><li><a href="mailto:info@vetsec.org">info@vetsec.org</a></li><li><a href="https://www.linkedin.com/company/veteransec" rel="noopener" target="_blank">LinkedIn</a></li><li><a href="https://x.com/VeteranSec" rel="noopener" target="_blank">X / Twitter</a></li><li><a href="https://www.youtube.com/c/VetSec" rel="noopener" target="_blank">YouTube</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> VetSec, Inc. · A registered 501(c)(3) nonprofit.</span><span class="badge">EIN 83-1966007</span></div>
+    </div>
+  </footer>
+  <script src="assets/js/main.js" defer></script>
+</body>
+</html>
