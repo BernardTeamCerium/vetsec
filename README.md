@@ -1,93 +1,85 @@
-# VetSec — Website
+# Vet-Sec Protection Agency — Website
 
-A clean, fast, accessible redesign of the VetSec website. VetSec is a 501(c)(3)
-nonprofit with the mission of *creating a world where no veteran pursuing a
-career in cybersecurity goes unemployed.*
+A clean, fast, accessible website for **Vet-Sec Protection Agency**, a 100%
+veteran-owned security-services company (founded 1994) providing uniformed
+officers, mobile patrol, alarm response, camera towers, remote video
+monitoring, and access-control installation across Phoenix, Tucson, Las Vegas,
+and Albuquerque — backed by a 24/7 National Dispatch Center.
 
-This is a **static site** — plain HTML, CSS, and a small amount of vanilla
-JavaScript. There is no build step and no framework, so it deploys anywhere
-(GitHub Pages, Netlify, Cloudflare Pages, S3, any web server).
+Static site — plain HTML, CSS, and a little vanilla JavaScript. No build step,
+no framework; it deploys anywhere (Netlify, GitHub Pages, Cloudflare Pages, S3,
+any web server).
 
 ## Design
 
-The look intentionally avoids the generic "AI site" template (purple gradients,
-glassmorphism, floating blobs). Instead it uses a restrained **field-manual /
-dossier** aesthetic:
+A **command-center / field-operations** aesthetic that avoids the generic
+"AI site" look:
 
-- **Palette** — deep ink navy, warm paper off-white, and a single
-  challenge-coin gold accent.
-- **Type** — IBM Plex Serif for headlines (editorial, trustworthy), IBM Plex
-  Sans for body, IBM Plex Mono for labels and stats (technical/security feel).
-- **Details** — hairline rules, monospace eyebrow labels, subtle stencil grid
-  on dark sections, no gratuitous motion. Respects `prefers-reduced-motion`.
+- **Palette** — midnight navy, signal red accent, steel neutrals, and a sparing
+  gold "veteran" star.
+- **Type** — Oswald (strong condensed headings), Inter (body), IBM Plex Mono
+  (labels/stats).
+- **Details** — red edge bars, a live "dispatch status" panel, sector icons,
+  hairline grids on dark sections, restrained motion. Responsive; respects
+  `prefers-reduced-motion`; skip-link + ARIA throughout.
 
-All colors, spacing, and type are defined as CSS custom properties in
-`assets/css/styles.css` (`:root`), so the theme is easy to retune.
+All colors, spacing, and type live as CSS custom properties in
+`assets/css/styles.css` (`:root`) — **the placeholder brand palette is one block
+to swap** for the official Vet-Sec colors.
 
-## Structure
+## Pages
 
 ```
-index.html             Home
-our-story.html         Our Story (founding, mission, timeline)
-programs.html          Programs (orientation → training → careers)
-partners.html          Partners & Sponsors (+ #donate section)
-team.html              Our Team
-global-network.html    Veterans Global Tech Network
-join.html              Join Us (membership request form)
-contact.html           Contact Us (contact form)
-assets/
-  css/styles.css       Design system + all components
-  js/main.js           Nav toggle, scroll reveal, form handling
-  img/                 SVG logo, light logo, favicon
+index.html        Home (hero, services, dispatch, sectors, process, CTA)
+services.html     Services detail (officers, patrol, alarm, towers, monitoring, systems)
+about.html        About (1994 founding, Army MP founders, values, timeline)
+why-vetsec.html   Why choose Vet-Sec (6 differentiators)
+locations.html    Phoenix HQ, Tucson, Las Vegas, Albuquerque + dispatch
+careers.html      Careers + application form
+contact.html      Contact / Request a Quote form
+assets/css/styles.css   Design system
+assets/js/main.js       Nav toggle, scroll reveal, form handling
+assets/img/             SVG logo (placeholder), light logo, favicon
 ```
 
-## Forms — operational by design
+## Forms — operational
 
-Both forms (Join and Contact) validate inline (accessible, no-JS-safe markup),
-block spam with a honeypot field, and submit through the first of three paths
-that applies — each one degrading gracefully to the next:
+The Quote (contact) and Careers forms validate inline (accessible), block spam
+with a honeypot, and submit via the first applicable path:
 
-1. **Netlify Forms (zero config, already wired).** The forms carry
-   `data-netlify="true"` and a hidden `form-name` field, so if the site is
-   deployed on [Netlify](https://docs.netlify.com/forms/setup/) submissions are
-   captured automatically — no account keys, no code changes. Submissions show
-   up in your Netlify dashboard and can email/Slack-notify you.
+1. **Netlify Forms** — wired with `data-netlify` + hidden `form-name`; captured
+   automatically with zero config if deployed on Netlify.
+2. **Custom endpoint** — set `data-endpoint` to a Formspree/Getform/your-own URL.
+3. **Email fallback** — works anywhere (e.g. GitHub Pages); opens a pre-filled
+   email. A failed Netlify/endpoint POST also falls back here.
 
-2. **Custom endpoint (Formspree / Getform / your own).** Set the `data-endpoint`
-   attribute on the `<form>` to a handler URL and it `POST`s there via `fetch`
-   instead. Useful if you're not on Netlify.
+> The fallback email is set to `info@vetsec.com` (`data-mailto`) as a
+> placeholder — change it to the real inbound address on `contact.html` and
+> `careers.html`.
 
-   ```html
-   <form data-form data-endpoint="https://formspree.io/f/yourid" ...>
-   ```
+## ⚠️ Brand assets — placeholders to replace
 
-3. **Email fallback (works anywhere, no setup).** On any host where the above
-   aren't available (e.g. GitHub Pages), the form opens the visitor's email
-   client with a pre-filled message to `info@vetsec.org` (the `data-mailto`
-   address). The forms are therefore **functional immediately**, and a failed
-   Netlify/endpoint POST also falls back here so a visitor is never stuck.
+This environment's network policy blocks `vetsec.com`, so the **official logo,
+brand colors, and photos/videos could not be pulled from the live site**. What's
+here is a tasteful stand-in:
 
-> Not using Netlify? Either drop a Formspree endpoint into `data-endpoint` on
-> `join.html` and `contact.html`, or remove the `data-netlify` attribute to use
-> the email fallback directly.
+- `assets/img/logo.svg`, `logo-light.svg`, `favicon.svg` — placeholder shield
+  mark. Drop in the official logo (same filenames) to swap site-wide.
+- Palette in `:root` is a placeholder; replace with the official hex values.
+- No photography/video is included. To use the real site's media, either add
+  `vetsec.com` (and any image/video host) to the environment's network egress
+  allowlist so it can be fetched, or provide the files.
+
+Content (services, history, founders, locations, phone) reflects public
+information about Vet-Sec Protection Agency; verify details before launch.
 
 ## Running locally
 
-No tooling required — open `index.html` in a browser, or serve the folder:
-
 ```bash
-python3 -m http.server 8080
-# then visit http://localhost:8080
+python3 -m http.server 8080   # then open http://localhost:8080
 ```
 
-## Content & assets note
+## Deploying
 
-Copy reflects the content currently published by VetSec (mission, programs,
-partners, team, and the Veterans Global Tech Network). The logo and favicon in
-`assets/img/` are clean SVG recreations of the VetSec brand mark; drop in the
-official logo files (same filenames) to swap them without touching markup.
-
-## Deploying to GitHub Pages
-
-A `.nojekyll` file is included so asset folders are served as-is. Point Pages at
-the branch root and the site is live.
+`.nojekyll` is included for GitHub Pages. Point Pages (or Netlify) at the branch
+root and the site is live.
