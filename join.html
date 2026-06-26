@@ -68,7 +68,8 @@
 
               <!-- Operational form. To enable backend delivery, set data-endpoint to your
                    Formspree/Netlify/own URL. With no endpoint it falls back to a pre-filled email. -->
-              <form data-form data-mailto="info@vetsec.org" data-subject="Membership invite request" data-endpoint="">
+              <form data-form name="join-request" method="POST" data-netlify="true" netlify-honeypot="company_website" data-mailto="info@vetsec.org" data-subject="Membership invite request" data-endpoint="">
+                <input type="hidden" name="form-name" value="join-request" />
                 <div class="form-row">
                   <div class="field">
                     <label for="j-first">First name <span class="req">*</span></label>

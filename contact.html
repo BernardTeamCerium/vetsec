@@ -81,7 +81,8 @@
 
               <!-- Operational form. Set data-endpoint to a Formspree/Netlify/own URL to
                    deliver server-side; with no endpoint it falls back to a pre-filled email. -->
-              <form data-form data-mailto="info@vetsec.org" data-endpoint="">
+              <form data-form name="contact" method="POST" data-netlify="true" netlify-honeypot="company_website" data-mailto="info@vetsec.org" data-endpoint="">
+                <input type="hidden" name="form-name" value="contact" />
                 <div class="form-row">
                   <div class="field">
                     <label for="c-name">Name <span class="req">*</span></label>

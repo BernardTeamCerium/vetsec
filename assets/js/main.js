@@ -74,7 +74,7 @@
     var lines = [];
     form.querySelectorAll('input, select, textarea').forEach(function (el) {
       if (!el.name || el.type === 'checkbox' && !el.checked) return;
-      if (el.classList.contains('hp-field')) return;
+      if (el.type === 'hidden' || el.classList.contains('hp-field')) return;
       if (el.type === 'checkbox') { lines.push(labelFor(el) + ': Yes'); return; }
       if (el.value.trim() === '') return;
       lines.push(labelFor(el) + ': ' + el.value.trim());
@@ -117,37 +117,57 @@
       }
 
       var endpoint = form.getAttribute('data-endpoint');
+      var isNetlify = form.hasAttribute('data-netlify');
       var mailto = form.getAttribute('data-mailto') || 'info@vetsec.org';
       var btn = form.querySelector('button[type="submit"]');
 
-      // Path 1: real endpoint configured -> POST via fetch.
+      function busy(on) {
+        if (!btn) return;
+        if (on) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
+        else { btn.disabled = false; if (btn.dataset.label) btn.textContent = btn.dataset.label; }
+      }
+      function succeed() {
+        setStatus(form, 'ok', 'Thank you — your message has been sent. We’ll be in touch soon.');
+        form.reset();
+      }
+      function fallbackToEmail() {
+        window.location.href = buildMailto(form, mailto);
+        setStatus(form, 'ok', 'Opening your email app to finish sending. If nothing happens, email us at ' + mailto + '.');
+      }
+
+      // Path 1: Netlify Forms — AJAX POST (url-encoded) to the form's action.
+      // On Netlify this is captured natively with zero configuration; on any
+      // other host the POST fails and we fall back to email.
+      if (isNetlify) {
+        busy(true);
+        setStatus(form, 'ok', 'Sending…');
+        var body = new URLSearchParams(new FormData(form)).toString();
+        fetch(form.getAttribute('action') || '/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body
+        }).then(function (res) {
+          if (res.ok) { succeed(); } else { throw new Error('Bad status ' + res.status); }
+        }).catch(fallbackToEmail).finally(function () { busy(false); });
+        return;
+      }
+
+      // Path 2: explicit endpoint (Formspree / Getform / your own) -> POST via fetch.
       if (endpoint && /^https?:\/\//.test(endpoint)) {
-        if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
+        busy(true);
         setStatus(form, 'ok', 'Sending…');
         fetch(endpoint, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
           body: new FormData(form)
         }).then(function (res) {
-          if (res.ok) {
-            setStatus(form, 'ok', 'Thank you — your message has been sent. We’ll be in touch soon.');
-            form.reset();
-          } else {
-            throw new Error('Bad status ' + res.status);
-          }
-        }).catch(function () {
-          // Fall back to mailto so the user is never stuck.
-          window.location.href = buildMailto(form, mailto);
-          setStatus(form, 'ok', 'Opening your email app to finish sending. If nothing happens, email us at ' + mailto + '.');
-        }).finally(function () {
-          if (btn) { btn.disabled = false; if (btn.dataset.label) btn.textContent = btn.dataset.label; }
-        });
+          if (res.ok) { succeed(); } else { throw new Error('Bad status ' + res.status); }
+        }).catch(fallbackToEmail).finally(function () { busy(false); });
         return;
       }
 
-      // Path 2: no endpoint -> mailto fallback (works with zero configuration).
-      window.location.href = buildMailto(form, mailto);
-      setStatus(form, 'ok', 'Opening your email app to finish sending. If nothing happens, email us directly at ' + mailto + '.');
+      // Path 3: nothing configured -> mailto fallback (works with zero setup).
+      fallbackToEmail();
     });
   });
 

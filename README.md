@@ -44,29 +44,32 @@ assets/
 ## Forms — operational by design
 
 Both forms (Join and Contact) validate inline (accessible, no-JS-safe markup),
-block spam with a honeypot field, and submit in one of two ways:
+block spam with a honeypot field, and submit through the first of three paths
+that applies — each one degrading gracefully to the next:
 
-1. **Backend endpoint (recommended for production).** Set the `data-endpoint`
-   attribute on the `<form>` to your form handler URL. The form then `POST`s
-   the data there via `fetch` and shows a success message. Works out of the box
-   with [Formspree](https://formspree.io), Netlify Forms, Basin, Getform, or
-   any endpoint that accepts `multipart/form-data`.
+1. **Netlify Forms (zero config, already wired).** The forms carry
+   `data-netlify="true"` and a hidden `form-name` field, so if the site is
+   deployed on [Netlify](https://docs.netlify.com/forms/setup/) submissions are
+   captured automatically — no account keys, no code changes. Submissions show
+   up in your Netlify dashboard and can email/Slack-notify you.
+
+2. **Custom endpoint (Formspree / Getform / your own).** Set the `data-endpoint`
+   attribute on the `<form>` to a handler URL and it `POST`s there via `fetch`
+   instead. Useful if you're not on Netlify.
 
    ```html
    <form data-form data-endpoint="https://formspree.io/f/yourid" ...>
    ```
 
-2. **Email fallback (zero config).** With `data-endpoint` left empty, the form
-   opens the visitor's email client with a pre-filled message to
-   `info@vetsec.org` (the address in `data-mailto`). This means the forms are
-   **functional immediately** with no server setup, and upgrade to silent
-   server-side delivery the moment you add an endpoint.
+3. **Email fallback (works anywhere, no setup).** On any host where the above
+   aren't available (e.g. GitHub Pages), the form opens the visitor's email
+   client with a pre-filled message to `info@vetsec.org` (the `data-mailto`
+   address). The forms are therefore **functional immediately**, and a failed
+   Netlify/endpoint POST also falls back here so a visitor is never stuck.
 
-If a configured endpoint ever errors, the form automatically falls back to the
-email path so a visitor is never left stuck.
-
-> To wire up Formspree: create a form, copy the endpoint, and paste it into the
-> `data-endpoint` attribute on `join.html` and `contact.html`.
+> Not using Netlify? Either drop a Formspree endpoint into `data-endpoint` on
+> `join.html` and `contact.html`, or remove the `data-netlify` attribute to use
+> the email fallback directly.
 
 ## Running locally
 
