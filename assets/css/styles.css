@@ -7,7 +7,7 @@
    Vet-Sec colors when available.
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 
 :root {
   --navy-900: #0A1726;   /* hero / footer */
@@ -35,9 +35,9 @@
   --radius-lg: 8px;
   --shadow: 0 1px 2px rgba(10,23,38,.06), 0 16px 40px -20px rgba(10,23,38,.35);
 
-  --font-head: 'Oswald', 'Arial Narrow', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-head: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-body: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-mono: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 
   --step--1: clamp(.82rem, .8rem + .1vw, .9rem);
   --step-0:  clamp(1rem, .97rem + .15vw, 1.08rem);
@@ -74,8 +74,8 @@ ul { list-style: none; padding: 0; }
 .mx-auto { margin-inline: auto; }
 
 /* ---- Typography ---- */
-h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 600; line-height: 1.08; letter-spacing: .01em; color: var(--ink); text-transform: uppercase; }
-h1 { font-size: var(--step-4); letter-spacing: .005em; }
+h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1.1; letter-spacing: -.01em; color: var(--ink); text-transform: uppercase; }
+h1 { font-size: var(--step-4); font-weight: 800; letter-spacing: -.02em; }
 h2 { font-size: var(--step-3); }
 h3 { font-size: var(--step-2); }
 h4 { font-size: var(--step-1); }
@@ -149,8 +149,8 @@ strong { font-weight: 600; color: var(--ink); }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 76px; }
 .brand { display: inline-flex; align-items: center; }
 .brand svg, .brand img { height: 46px; width: auto; }
-.nav-links { display: flex; align-items: center; gap: 1.5rem; }
-.nav-links a { font-family: var(--font-head); text-transform: uppercase; font-size: .95rem; font-weight: 500; letter-spacing: .03em; color: var(--ink); position: relative; padding-block: .3rem; }
+.nav-links { display: flex; align-items: center; gap: 1.15rem; }
+.nav-links a { font-family: var(--font-head); text-transform: uppercase; font-size: .85rem; font-weight: 600; letter-spacing: .01em; color: var(--ink); position: relative; padding-block: .3rem; white-space: nowrap; }
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--red); }
 .nav-links a[aria-current="page"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--red); }
 .nav-links .btn { display: none; }
@@ -163,7 +163,7 @@ strong { font-weight: 600; color: var(--ink); }
 .nav-toggle[aria-expanded="true"] span::before { transform: translateY(0) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span::after { transform: translateY(-2px) rotate(-45deg); }
 
-@media (max-width: 980px) {
+@media (max-width: 1080px) {
   .nav-toggle { display: inline-flex; }
   .nav-links {
     position: fixed; inset: 116px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0;

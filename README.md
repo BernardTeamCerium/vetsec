@@ -17,8 +17,8 @@ A **command-center / field-operations** aesthetic that avoids the generic
 
 - **Palette** — midnight navy, signal red accent, steel neutrals, and a sparing
   gold "veteran" star.
-- **Type** — Oswald (strong condensed headings), Inter (body), IBM Plex Mono
-  (labels/stats).
+- **Type** — Montserrat throughout (bold uppercase headings, regular body,
+  letter-spaced labels/stats).
 - **Details** — red edge bars, a live "dispatch status" panel, sector icons,
   hairline grids on dark sections, restrained motion. Responsive; respects
   `prefers-reduced-motion`; skip-link + ARIA throughout.
