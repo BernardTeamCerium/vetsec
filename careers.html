@@ -34,8 +34,24 @@
         <span class="eyebrow">Careers</span>
         <h1>Serve again — in a uniform that protects your community.</h1>
         <p>We're proud to employ veterans and civilians alike. If you take pride in doing the job right, we want to hear from you.</p>
+        <div class="hero-cta">
+          <a class="btn btn--primary btn--lg" href="#apply">Apply online <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--light btn--lg" href="tel:+18009093628">Call 1-800-909-3628</a>
+        </div>
       </div>
     </section>
+
+    <!-- =====================================================================
+         ONLINE APPLICATION
+         The client's new online application (built on the existing vetsec.com
+         site within the last few weeks) should be wired in here. To connect it:
+           • Hosted ATS/application URL  -> point the "Apply online" buttons and
+             the form's data-endpoint at that URL, OR
+           • Embed code / iframe         -> replace the <form> below with the
+             provided embed inside the .form-card.
+         Until that link/embed is supplied, the built-in application form below
+         is fully functional (Netlify Forms, with a mailto fallback to HR).
+         ===================================================================== -->
 
     <section class="section">
       <div class="wrap">
@@ -69,8 +85,8 @@
           </div>
 
           <div>
-            <div class="form-card">
-              <h2 style="font-size:var(--step-2);">Apply now</h2>
+            <div class="form-card" id="apply" style="scroll-margin-top:120px;">
+              <h2 style="font-size:var(--step-2);">Apply online</h2>
               <p style="color:var(--text-muted); margin:.5rem 0 1.5rem;">Tell us a bit about you and we'll be in touch. Fields marked <span style="color:var(--red);">*</span> are required.</p>
               <form data-form name="careers" method="POST" data-netlify="true" netlify-honeypot="company_website" data-mailto="btuggay@vetsec.com" data-subject="Career application" data-endpoint="">
                 <input type="hidden" name="form-name" value="careers" />
