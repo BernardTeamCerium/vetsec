@@ -1,23 +1,38 @@
 /* =========================================================================
    Vet-Sec Protection Agency — Design System
    100% Veteran-Owned professional security services.
-   Aesthetic: command-center / field-operations. Midnight navy + signal red,
-   steel neutrals, a sparing gold "veteran" star. Strong condensed headings.
-   NOTE: placeholder brand palette — swap the tokens in :root for the official
-   Vet-Sec colors when available.
+   Aesthetic: command-center / field-operations, tied to the VET·SEC shield.
+   Deep shield NAVY leads; signal RED is reserved for strategic emphasis
+   (primary CTAs, active states, key accents); understated STEEL/SILVER
+   metallic accents add polish; a sparing gold "veteran" star. Body and most
+   headings in Montserrat for clean readability, with a Sanchez slab-serif
+   display face used selectively to echo the logo's wordmark.
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Sanchez:wght@400&display=swap');
 
 :root {
+  /* --- Shield navy (dominant brand color) --- */
   --navy-900: #0A1726;   /* hero / footer */
   --navy-800: #0F2138;
   --navy-700: #16314F;
-  --navy-600: #1d3e63;
-  --red:      #C8102E;   /* signal accent / primary CTA */
+  --navy-600: #1B3A6B;   /* logo shield chief blue */
+  --navy-500: #274a7d;
+
+  /* --- Signal red (strategic emphasis only) --- */
+  --red:      #C8102E;   /* primary CTA / active states */
   --red-600:  #A30C24;
-  --gold:     #C9A227;   /* veteran star, used sparingly */
+  --red-700:  #8E1B22;   /* logo deep-red, for slab display accents */
+
+  /* --- Metallic steel / silver accents (understated) --- */
   --steel:    #5C6B7C;
+  --silver:   #AEB9C6;
+  --silver-2: #C9D2DC;
+  --silver-lite:#E4E9EF;
+  --metal-grad: linear-gradient(135deg, #eef2f7 0%, #cdd6e0 45%, #eef2f7 100%);
+  --metal-line: linear-gradient(90deg, transparent, var(--silver) 20%, var(--silver-2) 50%, var(--silver) 80%, transparent);
+
+  --gold:     #C9A227;   /* veteran star, used sparingly */
   --ink:      #132233;   /* body headings on light */
   --text:     #25333f;
   --text-muted:#5b6b79;
@@ -38,6 +53,7 @@
   --font-head: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --font-body: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --font-mono: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-display: 'Sanchez', 'Rockwell', 'Roboto Slab', Georgia, serif;
 
   --step--1: clamp(.82rem, .8rem + .1vw, .9rem);
   --step-0:  clamp(1rem, .97rem + .15vw, 1.08rem);
@@ -73,26 +89,33 @@ ul { list-style: none; padding: 0; }
 .measure { max-width: 64ch; }
 .mx-auto { margin-inline: auto; }
 
-/* ---- Typography ---- */
+/* ---- Typography ----
+   H1 uses the Sanchez slab-serif display face (sentence case) to echo the
+   VET·SEC logo wordmark — the one deliberately "branded" type moment. H2–H4
+   stay in condensed uppercase Montserrat for clean, readable hierarchy. */
 h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1.1; letter-spacing: -.01em; color: var(--ink); text-transform: uppercase; }
-h1 { font-size: var(--step-4); font-weight: 800; letter-spacing: -.02em; }
+h1 { font-family: var(--font-display); font-size: var(--step-4); font-weight: 400; line-height: 1.06; letter-spacing: -.01em; text-transform: none; }
 h2 { font-size: var(--step-3); }
 h3 { font-size: var(--step-2); }
 h4 { font-size: var(--step-1); }
 p { color: var(--text); }
 p + p { margin-top: 1rem; }
 strong { font-weight: 600; color: var(--ink); }
+/* Opt-in slab display for select subheads / stat numbers that should carry brand personality */
+.display { font-family: var(--font-display); font-weight: 400; text-transform: none; letter-spacing: -.005em; }
 
+/* Kickers/eyebrows now lead with steel (navy family) and reserve red for the
+   short accent rule — reducing red's overall footprint per brand direction. */
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--step--1);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .2em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--steel);
   display: inline-flex; align-items: center; gap: .6rem;
 }
-.eyebrow::before { content: ""; width: 1.7rem; height: 2px; background: var(--red); }
+.eyebrow::before { content: ""; width: 1.7rem; height: 2px; background: var(--red); border-radius: 2px; }
 .eyebrow--center::before { display: none; }
 
 .lead { font-size: var(--step-1); line-height: 1.55; color: var(--steel); font-family: var(--font-body); }
@@ -113,14 +136,16 @@ strong { font-weight: 600; color: var(--ink); }
   white-space: nowrap;
 }
 .btn:active { transform: translateY(1px); }
-.btn--primary { background: var(--red); color: #fff; border-color: var(--red); }
+/* Primary = the single strategic red action. A hairline top highlight gives a
+   subtle machined/metallic finish shared across button styles. */
+.btn--primary { background: var(--red); color: #fff; border-color: var(--red); box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
 .btn--primary:hover { background: var(--red-600); border-color: var(--red-600); }
-.btn--navy { background: var(--navy-800); color: #fff; border-color: var(--navy-800); }
-.btn--navy:hover { background: var(--navy-700); }
-.btn--ghost { background: transparent; color: var(--ink); border-color: var(--line); }
-.btn--ghost:hover { border-color: var(--navy-800); }
-.btn--light { background: transparent; color: #fff; border-color: var(--line-dark); }
-.btn--light:hover { border-color: var(--red); color: #fff; background: var(--red); }
+.btn--navy { background: var(--navy-800); color: #fff; border-color: var(--navy-800); box-shadow: inset 0 1px 0 rgba(255,255,255,.12); }
+.btn--navy:hover { background: var(--navy-700); border-color: var(--navy-700); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--silver); }
+.btn--ghost:hover { border-color: var(--navy-800); color: var(--navy-800); }
+.btn--light { background: transparent; color: #fff; border-color: rgba(255,255,255,.28); }
+.btn--light:hover { border-color: #fff; color: var(--navy-900); background: #fff; }
 .btn--lg { padding: 1rem 1.8rem; font-size: 1.1rem; }
 .btn .arrow { transition: transform .2s ease; }
 .btn:hover .arrow { transform: translateX(3px); }
@@ -220,18 +245,20 @@ strong { font-weight: 600; color: var(--ink); }
 /* ---- Stat strip ---- */
 .statgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
 .statgrid .stat { background: var(--surface); padding: 1.7rem 1.4rem; }
-.statgrid .stat b { display: block; font-family: var(--font-head); font-size: clamp(2rem, 1.5rem + 1.8vw, 2.9rem); color: var(--navy-800); line-height: 1; }
+.statgrid .stat b { display: block; font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 1.5rem + 1.8vw, 2.9rem); color: var(--navy-800); line-height: 1; }
 .statgrid .stat span { display: block; margin-top: .5rem; font-size: .9rem; color: var(--text-muted); }
-.statgrid .stat .k { font-family: var(--font-mono); color: var(--red); text-transform: uppercase; letter-spacing: .04em; }
+.statgrid .stat .k { font-family: var(--font-mono); color: var(--steel); text-transform: uppercase; letter-spacing: .04em; }
 @media (max-width: 720px) { .statgrid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ---- Service cards ---- */
 .cardgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.75rem; position: relative; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
-.card::after { content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background: var(--red); transform: scaleY(0); transform-origin: top; transition: transform .25s ease; border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+/* Left rail is navy by default (brand-dominant); the red only flashes on hover
+   as a strategic accent. */
+.card::after { content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background: var(--navy-600); transform: scaleY(0); transform-origin: top; transition: transform .25s ease, background .25s ease; border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
 .card:hover { border-color: var(--navy-700); transform: translateY(-3px); box-shadow: var(--shadow); }
-.card:hover::after { transform: scaleY(1); }
-.card .num { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .12em; color: var(--red); text-transform: uppercase; }
+.card:hover::after { transform: scaleY(1); background: var(--red); }
+.card .num { font-family: var(--font-mono); font-size: .75rem; letter-spacing: .12em; color: var(--steel); text-transform: uppercase; }
 .card .ico { width: 46px; height: 46px; margin-bottom: 1.1rem; color: var(--navy-800); }
 .card h3 { font-size: var(--step-1); margin-bottom: .5rem; }
 .card p { color: var(--text-muted); font-size: .97rem; }
@@ -269,10 +296,11 @@ strong { font-weight: 600; color: var(--ink); }
 .loc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
 .loc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.6rem; position: relative; }
 .loc.hq { border-color: var(--navy-700); box-shadow: var(--shadow); }
-.loc .tag { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+.loc .tag { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); }
 .loc h3 { font-size: var(--step-1); margin: .3rem 0 .6rem; }
 .loc address { font-style: normal; color: var(--text-muted); font-size: .96rem; line-height: 1.6; }
 .loc .hqbadge { position: absolute; top: 1.2rem; right: 1.2rem; font-family: var(--font-mono); font-size: .64rem; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--red); padding: .2rem .5rem; border-radius: 2px; }
+.loc.hq .tag, .loc.soon .tag { display: inline-block; padding-right: 7rem; }
 .loc a.locphone { display: inline-flex; margin-top: .9rem; font-weight: 600; color: var(--navy-800); }
 .loc a.locphone:hover { color: var(--red); }
 
@@ -281,7 +309,7 @@ strong { font-weight: 600; color: var(--ink); }
 .member { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.5rem; }
 .member .avatar { width: 58px; height: 58px; border-radius: var(--radius); display: grid; place-items: center; background: var(--navy-800); color: var(--gold); font-family: var(--font-head); font-weight: 600; font-size: 1.3rem; margin-bottom: 1rem; }
 .member h3 { font-size: 1.25rem; }
-.member .role { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--red); margin: .25rem 0 .7rem; }
+.member .role { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--steel); margin: .25rem 0 .7rem; }
 .member p { color: var(--text-muted); font-size: .94rem; }
 
 /* ---- Timeline ---- */
@@ -319,7 +347,7 @@ strong { font-weight: 600; color: var(--ink); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; }
 @media (max-width: 820px){ .contact-grid { grid-template-columns: 1fr; } }
 .info-block + .info-block { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
-.info-block .k { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--red); }
+.info-block .k { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase; color: var(--steel); }
 .info-block a, .info-block p { font-size: 1.05rem; color: var(--ink); }
 .info-block a:hover { color: var(--red); }
 .social { display: flex; gap: .6rem; flex-wrap: wrap; }
@@ -335,9 +363,9 @@ strong { font-weight: 600; color: var(--ink); }
 .cta .hero-cta { justify-content: center; }
 
 /* ---- Footer ---- */
-.site-footer { background: var(--navy-900); color: rgba(255,255,255,.72); padding-block: clamp(3rem, 6vw, 4.5rem) 2rem; border-top: 4px solid var(--red); }
+.site-footer { background: var(--navy-900); color: rgba(255,255,255,.72); padding-block: clamp(3rem, 6vw, 4.5rem) 2rem; border-top: 3px solid transparent; border-image: var(--metal-line) 1; }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.1fr 1.1fr; gap: 1.6rem; }
-.footer-grid h4 { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--red); font-weight: 500; margin-bottom: 1rem; }
+.footer-grid h4 { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: var(--silver); font-weight: 600; margin-bottom: 1rem; }
 .footer-grid a { color: rgba(255,255,255,.72); font-size: .96rem; display: inline-block; padding: .25rem 0; }
 .footer-grid a:hover { color: #fff; }
 .footer-brand svg { height: 44px; margin-bottom: 1rem; }
@@ -352,7 +380,7 @@ strong { font-weight: 600; color: var(--ink); }
 /* ---- Page hero (interior) ---- */
 .page-hero { background: var(--navy-900); color: #fff; padding-block: clamp(3rem, 7vw, 5rem); position: relative; overflow: hidden; }
 .page-hero::before { content:""; position:absolute; inset:0; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(110% 100% at 90% 0%, #000 20%, transparent 70%); }
-.page-hero::after { content:""; position:absolute; top:0; bottom:0; left:0; width:6px; background: var(--red); }
+.page-hero::after { content:""; position:absolute; top:0; bottom:0; left:0; width:5px; background: linear-gradient(var(--silver), var(--steel)); }
 .page-hero .wrap { position: relative; }
 .page-hero h1 { color: #fff; margin-top: .8rem; max-width: 20ch; }
 .page-hero p { color: rgba(255,255,255,.82); margin-top: 1.2rem; max-width: 60ch; font-size: var(--step-1); }
@@ -425,6 +453,80 @@ strong { font-weight: 600; color: var(--ink); }
 .photo-band > * { position: relative; max-width: 60ch; }
 .photo-band h2, .photo-band h3 { color: #fff; }
 .photo-band p { color: rgba(255,255,255,.85); }
+
+/* =========================================================================
+   Extended components — service pillars, Technology / Smart Sentry, metallic
+   accents, placeholders, and local-presence cards.
+   ========================================================================= */
+
+/* ---- Metallic accent helpers ---- */
+.metal-rule { height: 2px; border: 0; background: var(--metal-line); margin-block: clamp(2rem,5vw,3.5rem); }
+.metal-top { border-top: 3px solid transparent; border-image: var(--metal-line) 1; }
+.band-steel { background: linear-gradient(180deg, #eef2f7, #e2e8f0); }
+
+/* ---- Service pillars (Guard / Patrol / Technology) ---- */
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+@media (max-width: 900px){ .pillars { grid-template-columns: 1fr; } }
+.pillar { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.9rem 1.75rem; overflow: hidden; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+.pillar::before { content:""; position:absolute; inset:0 0 auto 0; height:3px; background: var(--metal-line); opacity:.9; }
+.pillar:hover { border-color: var(--navy-700); transform: translateY(-3px); box-shadow: var(--shadow); }
+.pillar .p-ico { width: 52px; height: 52px; color: var(--navy-700); margin-bottom: 1.1rem; }
+.pillar .p-ico svg { width: 100%; height: 100%; }
+.pillar h3 { font-size: var(--step-1); margin-bottom: .5rem; }
+.pillar > p { color: var(--text-muted); font-size: .97rem; }
+.pillar .p-list { margin-top: 1rem; display: flex; flex-direction: column; gap: .35rem; }
+.pillar .p-list span { font-size: .9rem; color: var(--text); display: flex; align-items: center; gap: .5rem; }
+.pillar .p-list span::before { content:""; width:6px; height:6px; border-radius:1px; background: var(--navy-600); flex:none; }
+.pillar .p-list span.hot::before { background: var(--red); }
+.pillar .card-link { margin-top: auto; padding-top: 1.2rem; display: inline-flex; }
+
+/* ---- Technology: S3 product + spec cards ---- */
+.s3grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+@media (max-width: 860px){ .s3grid { grid-template-columns: 1fr; } }
+.s3card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; }
+.s3card .s3img { aspect-ratio: 4/3; background: #fff center/contain no-repeat; background-image: var(--img, none); border-bottom: 1px solid var(--line); }
+.s3card .s3body { padding: 1.4rem 1.5rem 1.6rem; }
+.s3card h3 { font-size: 1.2rem; margin-bottom: .2rem; }
+.s3card .s3sub { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--steel); }
+.s3card ul { margin-top: .9rem; display: flex; flex-direction: column; gap: .4rem; }
+.s3card li { font-size: .92rem; color: var(--text-muted); display: flex; gap: .5rem; align-items: flex-start; }
+.s3card li::before { content:""; width:14px; height:14px; margin-top:.28rem; flex:none; border-radius:50%; background: var(--navy-600) radial-gradient(circle at 35% 30%, rgba(255,255,255,.5), transparent 60%); }
+
+/* two-column spec/feature lists */
+.speclist { display: grid; grid-template-columns: 1fr 1fr; gap: .35rem 2rem; }
+@media (max-width: 640px){ .speclist { grid-template-columns: 1fr; } }
+.speclist li { display: flex; gap: .6rem; align-items: flex-start; padding: .5rem 0; border-bottom: 1px dashed var(--line); color: var(--text); font-size: .95rem; }
+.speclist .tick { flex:none; width: 18px; height: 18px; color: var(--red); margin-top: .15rem; }
+
+/* download / sell-sheet button block */
+.download-card { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--navy-600); border-radius: var(--radius-lg); padding: 1.25rem 1.4rem; }
+.download-card .dl-ico { width: 40px; height: 40px; color: var(--navy-700); flex: none; }
+.download-card p { color: var(--text-muted); font-size: .95rem; margin: 0; }
+.download-card .btn { margin-left: auto; }
+@media (max-width: 560px){ .download-card .btn { margin-left: 0; width: 100%; justify-content: center; } }
+
+/* S3 hexagon mark chip */
+.s3-mark { display: inline-flex; align-items: center; gap: .8rem; }
+.s3-mark img { height: 60px; width: auto; }
+
+/* ---- Placeholder / pending-assets callout ---- */
+.placeholder { position: relative; background: repeating-linear-gradient(135deg, var(--surface-2), var(--surface-2) 12px, #e7edf4 12px, #e7edf4 24px); border: 1px dashed var(--silver); border-radius: var(--radius-lg); padding: 1.5rem 1.6rem; color: var(--steel); }
+.placeholder .pl-tag { display: inline-flex; align-items: center; gap: .45rem; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--steel); padding: .25rem .55rem; border-radius: 2px; margin-bottom: .7rem; }
+.placeholder p { color: var(--steel); font-size: .92rem; margin: 0; }
+.placeholder .qr { width: 108px; height: 108px; background: #fff; border: 1px solid var(--line); border-radius: 4px; display: grid; place-items: center; color: var(--silver); font-family: var(--font-mono); font-size: .6rem; text-align: center; }
+
+/* ---- Local presence: coming-soon + city cards ---- */
+.loc.soon { border-style: dashed; background: var(--surface-2); }
+.loc.soon .hqbadge { background: var(--steel); }
+.loc .locphone.soonline { color: var(--steel); pointer-events: none; }
+.city-hero-stats { display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; margin-top: 1.6rem; }
+.city-hero-stats div { display: flex; flex-direction: column; }
+.city-hero-stats b { font-family: var(--font-display); font-size: 1.6rem; color: var(--gold); line-height: 1; }
+.city-hero-stats span { font-size: .8rem; color: rgba(255,255,255,.7); margin-top: .25rem; }
+
+/* subtle inline pill */
+.pill { display: inline-block; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--navy-700); background: var(--silver-lite); border: 1px solid var(--silver-2); border-radius: 999px; padding: .25rem .7rem; }
+.pill--red { color: #fff; background: var(--red); border-color: var(--red); }
 
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition-duration: .01ms !important; animation: none !important; } }
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
