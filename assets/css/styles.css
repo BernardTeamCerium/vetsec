@@ -280,7 +280,11 @@ strong { font-weight: 600; color: var(--ink); }
 /* ---- Split ---- */
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
 .split--reverse .split-media { order: 2; }
+/* Prevent grid/flex children from forcing tracks wider than the viewport
+   (min-width:auto blowout) — keeps mobile free of horizontal scroll. */
+.split > *, .hero-grid > *, .contact-grid > * { min-width: 0; }
 @media (max-width: 820px) { .split { grid-template-columns: 1fr; } .split--reverse .split-media { order: 0; } }
+@media (max-width: 480px) { .btn { white-space: normal; } }
 
 .framed { border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); padding: 2rem; position: relative; }
 .framed::before { content: ""; position: absolute; inset: 10px; border: 1px dashed var(--line); border-radius: 4px; pointer-events: none; }
