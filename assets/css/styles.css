@@ -469,6 +469,15 @@ strong { font-weight: 600; color: var(--ink); }
 
 /* ---- Metallic accent helpers ---- */
 .metal-rule { height: 2px; border: 0; background: var(--metal-line); margin-block: clamp(2rem,5vw,3.5rem); }
+
+/* ---- Site map ---- */
+.sm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: clamp(1.75rem, 4vw, 2.75rem) 1.5rem; }
+.sm-col h3 { font-size: var(--step-1); margin-bottom: .9rem; padding-bottom: .55rem; border-bottom: 2px solid transparent; border-image: var(--metal-line) 1; }
+.sm-col ul { display: flex; flex-direction: column; gap: .55rem; }
+.sm-col a { color: var(--text); display: inline-block; border-bottom: 1px solid transparent; }
+.sm-col a:hover { color: var(--red); border-bottom-color: var(--red); }
+.footer-bottom a { color: rgba(255,255,255,.55); }
+.footer-bottom a:hover { color: #fff; }
 .metal-top { border-top: 3px solid transparent; border-image: var(--metal-line) 1; }
 .band-steel { background: linear-gradient(180deg, #eef2f7, #e2e8f0); }
 
