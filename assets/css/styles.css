@@ -479,6 +479,26 @@ strong { font-weight: 600; color: var(--ink); }
 .sm-col a:hover { color: var(--red); border-bottom-color: var(--red); }
 .footer-bottom a { color: rgba(255,255,255,.55); }
 .footer-bottom a:hover { color: #fff; }
+
+/* ---- Multi-step application form ---- */
+.form-progress { margin-bottom: 1.7rem; }
+.form-progress .fp-label { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--steel); margin-bottom: .5rem; }
+.form-progress .fp-track { height: 8px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.form-progress .fp-fill { height: 100%; background: var(--red); border-radius: 999px; transition: width .3s ease; }
+.form-step { border: 0; padding: 0; margin: 0; min-inline-size: 0; }
+.form-step:not(.is-active) { display: none; }
+.form-step .fs-title { font-family: var(--font-head); text-transform: uppercase; font-size: var(--step-1); color: var(--ink); margin-bottom: 1.1rem; letter-spacing: .01em; }
+.form-step h4 { margin: 1.3rem 0 .8rem; font-size: 1.05rem; }
+.form-step .fs-note { font-size: .9rem; color: var(--text-muted); margin-bottom: 1.1rem; }
+.terms-block { border-top: 1px solid var(--line); margin: 1.6rem 0 1.1rem; padding-top: 1.25rem; }
+.choice-group { display: flex; flex-wrap: wrap; gap: .5rem 1.6rem; margin-top: .3rem; }
+.choice { display: inline-flex; align-items: center; gap: .5rem; font-size: .95rem; color: var(--text); font-family: var(--font-body); text-transform: none; letter-spacing: 0; margin: 0; }
+.choice input { width: auto; margin: 0; }
+.form-nav { display: flex; gap: .75rem; align-items: center; margin-top: 1.8rem; }
+.form-nav [data-next], .form-nav [data-submit] { margin-left: auto; }
+.btn[hidden] { display: none; }
+/* Long yes/no question prompts read better in sentence case than all-caps */
+.field[data-require-one] > label { text-transform: none; letter-spacing: .005em; font-size: .92rem; font-family: var(--font-body); color: var(--ink); line-height: 1.45; }
 .metal-top { border-top: 3px solid transparent; border-image: var(--metal-line) 1; }
 .band-steel { background: linear-gradient(180deg, #eef2f7, #e2e8f0); }
 

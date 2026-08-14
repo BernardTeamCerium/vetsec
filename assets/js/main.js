@@ -77,6 +77,7 @@
     var lines = [];
     form.querySelectorAll('input, select, textarea').forEach(function (el) {
       if (!el.name || el.type === 'checkbox' && !el.checked) return;
+      if (el.type === 'radio' && !el.checked) return;
       if (el.type === 'hidden' || el.classList.contains('hp-field')) return;
       if (el.type === 'checkbox') { lines.push(labelFor(el) + ': Yes'); return; }
       if (el.value.trim() === '') return;
@@ -172,6 +173,74 @@
       // Path 3: nothing configured -> mailto fallback (works with zero setup).
       fallbackToEmail();
     });
+  });
+
+  /* ---- Multi-step forms -------------------------------------------------- */
+  document.querySelectorAll('form[data-multistep]').forEach(function (form) {
+    var steps = Array.prototype.slice.call(form.querySelectorAll('.form-step'));
+    if (!steps.length) return;
+    var prevBtn = form.querySelector('[data-prev]');
+    var nextBtn = form.querySelector('[data-next]');
+    var submitBtn = form.querySelector('[data-submit]');
+    var labelEl = form.querySelector('[data-step-label]');
+    var pctEl = form.querySelector('[data-step-pct]');
+    var fill = form.querySelector('.fp-fill');
+    var current = 0;
+
+    function validStep(i) {
+      var ok = true;
+      steps[i].querySelectorAll('input[required], select[required], textarea[required]').forEach(function (el) {
+        if (el.type === 'radio' || el.type === 'checkbox') return; // handled below
+        var wrap = el.closest('.field');
+        var valid = el.value.trim() !== '';
+        if (valid && el.type === 'email') valid = EMAIL_RE.test(el.value.trim());
+        if (wrap) wrap.classList.toggle('invalid', !valid);
+        if (!valid) ok = false;
+      });
+      steps[i].querySelectorAll('input[type=checkbox][required]').forEach(function (el) {
+        var wrap = el.closest('.field');
+        if (wrap) wrap.classList.toggle('invalid', !el.checked);
+        if (!el.checked) ok = false;
+      });
+      steps[i].querySelectorAll('[data-require-one]').forEach(function (g) {
+        var any = g.querySelectorAll('input:checked').length > 0;
+        g.classList.toggle('invalid', !any);
+        if (!any) ok = false;
+      });
+      return ok;
+    }
+
+    function show(i, scroll) {
+      steps.forEach(function (s, idx) { s.classList.toggle('is-active', idx === i); });
+      current = i;
+      var pct = Math.round((i + 1) / steps.length * 100);
+      if (labelEl) labelEl.textContent = 'Step ' + (i + 1) + ' of ' + steps.length;
+      if (pctEl) pctEl.textContent = pct + '%';
+      if (fill) fill.style.width = pct + '%';
+      if (prevBtn) prevBtn.hidden = i === 0;
+      if (nextBtn) nextBtn.hidden = i === steps.length - 1;
+      if (submitBtn) submitBtn.hidden = i !== steps.length - 1;
+      if (scroll) {
+        var y = form.getBoundingClientRect().top + window.pageYOffset - 90;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', function () {
+      if (validStep(current)) {
+        if (current < steps.length - 1) show(current + 1, true);
+      } else {
+        var bad = steps[current].querySelector('.field.invalid input, .field.invalid select, .field.invalid textarea');
+        if (bad) bad.focus();
+      }
+    });
+    if (prevBtn) prevBtn.addEventListener('click', function () { if (current > 0) show(current - 1, true); });
+    // clear invalid state on interaction within a step
+    form.addEventListener('change', function (e) {
+      var g = e.target.closest && e.target.closest('[data-require-one]');
+      if (g) g.classList.remove('invalid');
+    });
+    show(0, false);
   });
 
   /* ---- Footer year ------------------------------------------------------- */
