@@ -175,9 +175,9 @@ strong { font-weight: 600; color: var(--ink); }
 .brand { display: inline-flex; align-items: center; }
 .brand svg, .brand img { height: 46px; width: auto; }
 /* Explicit width — an SVG with width:auto collapses to 0 inside the flex brand row */
-.brand .brand-logo { height: 42px; width: 203px; flex: none; overflow: visible; }
-.footer-brand .brand-logo { height: 40px; width: 194px; margin-bottom: 1rem; }
-@media (max-width: 420px){ .brand .brand-logo { width: 174px; height: 36px; } }
+.brand .brand-logo { height: 46px; width: 207px; flex: none; overflow: visible; }
+.footer-brand .brand-logo { height: 44px; width: 198px; margin-bottom: 1rem; }
+@media (max-width: 420px){ .brand .brand-logo { width: 176px; height: 39px; } }
 .nav-links { display: flex; align-items: center; gap: 1.15rem; }
 .nav-links a { font-family: var(--font-head); text-transform: uppercase; font-size: .85rem; font-weight: 600; letter-spacing: .01em; color: var(--ink); position: relative; padding-block: .3rem; white-space: nowrap; }
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--red); }
